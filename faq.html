@@ -7,6 +7,67 @@
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 		<link href="assets/styles.css" rel="stylesheet">
 		<style>
+			
+		details{
+			width: fit-content;
+			border: solid black 1px;
+			border-radius: 5px;
+			padding:.5rem .5rem .5rem 1rem;
+			justify-content: center;
+
+			/* ::marker {
+			content: "+" ;
+			font-size: 1.2rem;
+			} */
+		}
+
+
+
+		details[open]:nth-of-type(1){
+			background-color: #975BED;	
+		}
+
+		details[open]:nth-of-type(2){
+			background-color: #65F0B6;
+		}
+
+		details[open]:nth-of-type(3){
+			background-color: #FCFF7F;
+		}
+
+		summary {
+			display: flex;
+			max-width: fit-content;
+			align-items: center;
+
+			line-height: 2em;
+			font-size: 1.2em;
+			gap: 1em;
+			cursor: pointer;
+
+			padding: 1em;
+			/* margin: 1em; */
+		}
+
+		summary::marker {
+			display: none;
+			place-content: center;
+			color: black;
+		}
+
+		summary::before {
+			content: "+";
+			font-size: 2em;
+			color: black;
+			transition: transform 0.2s ease;
+		}
+			
+			details[open] summary::before {
+			transform: rotate(45deg);
+		}
+		
+
+
 			/* Schrijf hier gewoon je CSS voor dit component */
 
 			/* Hint: Dit component kun je volledig met HTML en CSS bouwen */
@@ -32,6 +93,27 @@
 
 
 		<!-- Hint: Dit stukje HTML geeft het misschien al weg :) -->
+		<details>
+			<summary>
+				Wat is frontend development?
+			</summary>
+			<p>Een frontend developer ontwerpt en bouwt websites in HTML, CSS en JavaScript. Deze frontendtalen leer je bij ons, je hebt dus geen voorkennis nodig.</p>
+		</details>
+
+		<details>
+			<summary>
+				Moet ik al kunnen coderen?
+			</summary>
+			<p>Nee, je hebt helemaal geen voorkennis nodig om te beginnen aan deze opleiding, we kunnen je alles leren! Als je wel al voorkennis hebt, is dat alleen maar goed, dan kunnen we je helpen je skills te verbeteren en te verdiepen in de stof</p>
+		</details>
+
+			<details>
+			<summary>
+				Wat is een Associate Degree
+			</summary>
+			<p>Een Associate degree.... deze tekst is te lang.</p>
+		</details>
+
 		<details open>
 			<summary>Demo video</summary>
 			<video src="assets/faq.mp4" width="765" height="769" controls muted autoplay loop>
