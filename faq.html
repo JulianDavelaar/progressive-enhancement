@@ -12,7 +12,7 @@
 			width: fit-content;
 			border: solid black 1px;
 			border-radius: 5px;
-			padding:.5rem .5rem .5rem 1rem;
+			padding: 0 0 0 1rem;
 			justify-content: center;
 
 			/* ::marker {
@@ -37,8 +37,8 @@
 
 		summary {
 			display: flex;
-			max-width: fit-content;
-			align-items: center;
+			width: fit-content;
+			align-items: start;
 
 			line-height: 2em;
 			font-size: 1.2em;
@@ -54,6 +54,10 @@
 			place-content: center;
 			color: black;
 		}
+
+		/* @supports  (::marker) {
+			body {background-color: red;}
+		} */
 
 		summary::before {
 			content: "+";
