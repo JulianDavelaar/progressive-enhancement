@@ -7,11 +7,65 @@
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 		<link href="assets/styles.css" rel="stylesheet">
 		<style>
-			/* Schrijf hier gewoon je CSS voor dit component */
 
-			/* Hint: kijk eens naar de :target selector
-			   https://developer.mozilla.org/en-US/docs/Web/CSS/:target */
+		body {
+			font-family: 'Open Sans', sans-serif;
+			max-width: 60rem;
+			margin: 2rem auto;
+			}
+
+			.tab-list {
+			display: flex;
+			gap: 0.5rem;
+			border-bottom: 2px solid #ddd;
+			margin-bottom: 0;
+			}
+
+			.tab {
+			padding: 0.75rem 1.25rem;
+			text-decoration: none;
+			color: #555;
+			font-weight: bold;
+			border: 2px solid transparent;
+			border-bottom: none;
+			border-radius: 0.5rem 0.5rem 0 0;
+			margin-bottom: -2px;
+			}
+
+			.tab:hover {
+			color: #000;
+			}
+
+			.tab-panel {
+			display: none;
+			padding: 1.5rem;
+			border: 2px solid #ddd;
+			border-top: none;
+			border-radius: 0 0 0.5rem 0.5rem;
+			}
+
+			/* lat de tab zien die overeenkomt met de URL  */
+			.tab-panel:target {
+			display: block;
+			}
+
+			/* Als nog geen tab is gekozen maak eerste tab actief */
+			.tabs:not(:has(:target)) .tab-panel:first-of-type {
+			display: block;
+			}
+
+			.tabs:not(:has(:target)) .tab:first-of-type,
+			.tabs:has(#docenten:target) .tab[href="#docenten"],
+			.tabs:has(#sprints:target) .tab[href="#sprints"],
+			.tabs:has(#gedragscriteria:target) .tab[href="#gedragscriteria"],
+			.tabs:has(#openavond:target) .tab[href="#openavond"] {
+			color: #000;
+			border-color: #ddd;
+			background: white;
+			}
+
 		</style>
+		
 		<script type="module">
 			/* Schrijf hier eventueel je client-side JavaScript */
 		</script>
