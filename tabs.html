@@ -67,8 +67,84 @@
 		</style>
 		
 		<script type="module">
-			/* Schrijf hier eventueel je client-side JavaScript */
+			const tabContainer = document.querySelector('.tabs')
+			const tabList = tabContainer.querySelector('.tab-list')
+			const tabs = Array.from(tabContainer.querySelectorAll('.tab'))
+			const panels = Array.from(tabContainer.querySelectorAll('.tab-panel'))
+
+			// ARIA roles toevoegen voor schermlezers
+			tabList.setAttribute('role', 'tablist')
+
+			tabs.forEach((tab) => {
+			const panelId = tab.getAttribute('href').slice(1)  // verwijder de #
+			tab.setAttribute('role', 'tab')
+			tab.setAttribute('aria-controls', panelId)
+			tab.id = 'tab-' + panelId
+			})
+
+			panels.forEach((panel) => {
+			panel.setAttribute('role', 'tabpanel')
+			panel.setAttribute('aria-labelledby', 'tab-' + panel.id)
+			panel.setAttribute('tabindex', '0')
+			})
+
+			// Bepaal welke tab nu actief is op basis van de URL hash
+			function getActiveIndex() {
+			const hash = window.location.hash.slice(1)
+			const index = panels.findIndex(p => p.id === hash)
+			return index === -1 ? 0 : index
+			}
+
+			// Update ARIA en tabindex elke keer dat actieve tab verandert
+			function updateAria() {
+			const activeIndex = getActiveIndex()
+			tabs.forEach((tab, i) => {
+				const isActive = i === activeIndex
+				tab.setAttribute('aria-selected', isActive)
+				tab.setAttribute('tabindex', isActive ? '0' : '-1')
+			})
+			}
+
+			updateAria()
+
+			// Bij klikken: ARIA bijwerken
+			tabs.forEach((tab) => {
+			tab.addEventListener('click', () => {
+				setTimeout(updateAria, 0)
+			})
+			})
+
+			// Toetsenbord navigatie (W3C ARIA Tabs Pattern)
+			tabList.addEventListener('keydown', (event) => {
+			const currentIndex = tabs.indexOf(document.activeElement)
+			if (currentIndex === -1) return
+
+			let newIndex
+			switch (event.key) {
+				case 'ArrowRight':
+				newIndex = (currentIndex + 1) % tabs.length
+				break
+				case 'ArrowLeft':
+				newIndex = (currentIndex - 1 + tabs.length) % tabs.length
+				break
+				case 'Home':
+				newIndex = 0
+				break
+				case 'End':
+				newIndex = tabs.length - 1
+				break
+				default:
+				return
+			}
+
+			event.preventDefault()
+			tabs[newIndex].focus()
+			tabs[newIndex].click()
+			})		
+		
 		</script>
+
+		
 	</head>
 	<body>
 		<h1>Tabbladen</h1>
